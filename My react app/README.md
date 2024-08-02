@@ -1,4 +1,6 @@
-# React Full Course for Free ⚛️ (2024)
+
+
+# React Full Course for Free ⚛️ (2024) 
 
 This repository contains resources and notes based on the "React Full Course for Free ⚛️ (2024)" video tutorial. This course provides a comprehensive introduction to React, a popular JavaScript library for building user interfaces.
 
@@ -10,6 +12,11 @@ This repository contains resources and notes based on the "React Full Course for
 4. [Styling Components](#styling-components)
 5. [Props and Data Flow](#props-and-data-flow)
 6. [Conditional Rendering](#conditional-rendering)
+7. [Rendering Lists with Keys](#rendering-lists-with-keys)
+8. [Sorting and Filtering Arrays](#sorting-and-filtering-arrays)
+9. [Reusable Components with Props](#reusable-components-with-props)
+10. [Handling Click Events with useState](#handling-click-events-with-usestate)
+11. [Stateful Components with Input Handling](#stateful-components-with-input-handling)
 
 ## Introduction to React
 
@@ -288,6 +295,169 @@ function App() {
 export default App;
 ```
 
----
+## Rendering Lists with Keys
 
-By following this structured approach, you'll gain a solid understanding of React fundamentals and be able to build dynamic and efficient web applications. Happy coding!
+When rendering lists in React, it is important to provide a unique key for each list item to help React identify which items have changed, been added, or removed.
+
+### Example
+
+```jsx
+import React from 'react';
+
+const FruitList = ({ fruits }) => {
+  return (
+    <ul>
+      {fruits.map(fruit => (
+        <li key={fruit.id}>{fruit.name} - {fruit.calories} calories</li>
+      ))}
+    </ul>
+  );
+};
+
+// Usage
+const fruits = [
+  { id: 1, name: 'Apple', calories: 95 },
+  { id: 2, name: 'Banana', calories: 105 },
+  { id: 3, name: 'Orange', calories: 62 },
+];
+
+<FruitList fruits={fruits} />
+```
+
+In this example, each fruit object has a unique `id` used as a key for the list items.
+
+## Sorting and Filtering Arrays
+
+JavaScript's array methods like `sort` and `filter` can be used to manipulate arrays before rendering them in React.
+
+### Example
+
+```jsx
+import React from 'react';
+
+const SortedFruitList = ({ fruits }) => {
+  const sortedFruits = [...fruits].sort((a, b) => a.name.localeCompare(b.name));
+  const lowCalFruits = fruits.filter(fruit => fruit.calories < 100);
+
+  return (
+    <div>
+      <h2>Sorted Fruits</h2>
+      <ul>
+        {sortedFruits.map(fruit => (
+          <li key={fruit.id}>{fruit.name}</li>
+        ))}
+      </ul>
+
+
+      <h2>Low-Calorie Fruits</h2>
+      <ul>
+        {lowCalFruits.map(fruit => (
+          <li key={fruit.id}>{fruit.name}</li>
+        ))}
+      </ul>
+    </div>
+  );
+};
+
+// Usage
+const fruits = [
+  { id: 1, name: 'Apple', calories: 95 },
+  { id: 2, name: 'Banana', calories: 105 },
+  { id: 3, name: 'Orange', calories: 62 },
+];
+
+<SortedFruitList fruits={fruits} />
+```
+
+## Reusable Components with Props
+
+React components can be made reusable by using props to customize their behavior and appearance.
+
+### Example
+
+```jsx
+import React from 'react';
+
+const Button = ({ label, onClick, style }) => {
+  return (
+    <button onClick={onClick} style={style}>
+      {label}
+    </button>
+  );
+};
+
+// Usage
+<Button label="Click Me" onClick={() => alert('Clicked!')} style={{ color: 'white', backgroundColor: 'blue' }} />
+<Button label="Submit" onClick={() => console.log('Submitted')} style={{ color: 'black', backgroundColor: 'green' }} />
+```
+
+In this example, the `Button` component is reusable because its label, click handler, and styles can be customized using props.
+
+## Handling Click Events with useState
+
+React's `useState` hook is used to manage state in functional components, such as handling button clicks.
+
+### Example
+
+```jsx
+import React, { useState } from 'react';
+
+const ClickCounter = () => {
+  const [count, setCount] = useState(0);
+
+  const handleClick = () => {
+    setCount(count + 1);
+  };
+
+  return (
+    <div>
+      <button onClick={handleClick}>Click me</button>
+      <p>You clicked {count} times</p>
+    </div>
+  );
+};
+
+export default ClickCounter;
+```
+
+## Stateful Components with Input Handling
+
+React components can handle form input changes using the `useState` hook to manage the input state.
+
+### Example
+
+```jsx
+import React, { useState } from 'react';
+
+const UserForm = () => {
+  const [name, setName] = useState('');
+
+  const handleChange = (event) => {
+    setName(event.target.value);
+  };
+
+  return (
+    <div>
+      <input type="text" value={name} onChange={handleChange} placeholder="Enter your name" />
+      <p>Hello, {name}!</p>
+    </div>
+  );
+};
+
+export default UserForm;
+```
+
+In this example, the `UserForm` component manages the state of the `name` input field using the `useState` hook.
+
+## Conclusion
+
+This guide provides an overview of the key concepts and techniques covered in the "React Full Course for Free ⚛️ (2024)" video. By understanding these foundational elements, you'll be well-equipped to build and manage complex React applications.
+
+## References
+
+For further reading and deeper understanding, refer to the following resources:
+
+- [React Documentation](https://reactjs.org/docs/getting-started.html)
+- [JavaScript Array Methods](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array)
+- [CSS Modules](https://github.com/css-modules/css-modules)
+- [PropTypes Documentation](https://reactjs.org/docs/typechecking-with-proptypes.html)
