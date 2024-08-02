@@ -37,3 +37,51 @@
 .student p{
   margin: 0;
 }
+
+.welcome{
+  font-size: 2.5em;
+  background-color: rgb(25, 78, 78);
+  color: white;
+  padding: 20px;
+  text-align: center;
+  margin: 5px;
+  border-radius: 10px;
+}
+
+.login{
+  font-size: 2.5em;
+  background-color: rgb(181, 52, 26);
+  color: white;
+  padding: 20px;
+  text-align: center;
+  margin: 5px;
+  border-radius: 10px;
+}
+
+.list-category{
+  font-size: 2.5em;
+  font-weight: bold;
+  color: rgb(89, 205, 89);
+  background-color: rgb(0, 0, 0);
+  padding: 20px;
+  text-align: center;
+  font-family: Arial, Helvetica, sans-serif;
+  border-radius: 10px;
+  border: 3px solid rgb(89, 205, 89);
+}
+
+.list-items li{
+  font-size: 2em;
+  list-style: none;
+  color: rgb(126, 113, 24);
+  text-align: center;
+  margin: 0;
+}
+
+.list-items li:hover{
+  color:brown;
+  cursor: pointer;
+  background-color: aqua;
+  border-radius: 10px;
+  padding: 10px;
+}

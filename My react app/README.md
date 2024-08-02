@@ -1,6 +1,6 @@
 # React Full Course for Free ⚛️ (2024)
 
-This repository contains resources and notes based on the "React Full Course for Free ⚛️ (2024)" video tutorial. This course provides a comprehensive introduction to React, a popular JavaScript library for building user interfaces. 
+This repository contains resources and notes based on the "React Full Course for Free ⚛️ (2024)" video tutorial. This course provides a comprehensive introduction to React, a popular JavaScript library for building user interfaces.
 
 ## Table of Contents
 
@@ -23,6 +23,20 @@ To get started with React, you should have a basic understanding of JavaScript a
 2. **Create a Project Folder**: Use the command line to create a new project folder.
 3. **Start the Development Server**: Use npm to create a new React app and start the development server.
 
+```bash
+# Install create-react-app globally
+npm install -g create-react-app
+
+# Create a new React project
+create-react-app my-react-app
+
+# Navigate into the project directory
+cd my-react-app
+
+# Start the development server
+npm start
+```
+
 ### Project Structure
 
 - **node_modules**: Contains external libraries.
@@ -39,18 +53,91 @@ React components are reusable sections of code that can be composed to build com
 
 ### Header and Footer Components
 
-- **Header**: Contains an `<h1>` element and a navigation bar.
-- **Footer**: Contains a paragraph with a copyright symbol and the website name.
+```jsx
+// Header.js
+import React from 'react';
+
+function Header() {
+  return (
+    <header>
+      <h1>My Website</h1>
+      <nav>
+        <ul>
+          <li>Home</li>
+          <li>About</li>
+          <li>Contact</li>
+        </ul>
+      </nav>
+    </header>
+  );
+}
+
+export default Header;
+```
+
+```jsx
+// Footer.js
+import React from 'react';
+
+function Footer() {
+  return (
+    <footer>
+      <p>© 2024 My Website</p>
+    </footer>
+  );
+}
+
+export default Footer;
+```
 
 ### JSX Fragments
 
 Use JSX fragments (`<> </>`) to return multiple components from a single function.
+
+```jsx
+// App.js
+import React from 'react';
+import Header from './Header';
+import Footer from './Footer';
+
+function App() {
+  return (
+    <>
+      <Header />
+      <main>
+        <h2>Welcome to My Website</h2>
+        <p>This is a simple React application.</p>
+      </main>
+      <Footer />
+    </>
+  );
+}
+
+export default App;
+```
 
 ### Card Component
 
 - **Structure**: Includes an image, title, and description.
 - **Accessibility**: Set the `alt` attribute for images.
 - **Performance**: Use optimized image sizes.
+
+```jsx
+// Card.js
+import React from 'react';
+
+function Card({ image, title, description }) {
+  return (
+    <div className="card">
+      <img src={image} alt={title} />
+      <h3>{title}</h3>
+      <p>{description}</p>
+    </div>
+  );
+}
+
+export default Card;
+```
 
 ## Styling Components
 
@@ -62,9 +149,48 @@ There are three methods for styling React components:
 
 ### Example: Card Styling
 
-- Set class names for elements within the component.
-- Style using a dedicated CSS file.
-- Wrap multiple JSX elements in a fragment for a single return.
+```css
+/* Card.css */
+.card {
+  border: 1px solid #ccc;
+  padding: 16px;
+  margin: 16px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.card img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px 8px 0 0;
+}
+
+.card h3 {
+  margin: 8px 0;
+}
+
+.card p {
+  color: #666;
+}
+```
+
+```jsx
+// Card.js (with styling)
+import React from 'react';
+import './Card.css';
+
+function Card({ image, title, description }) {
+  return (
+    <div className="card">
+      <img src={image} alt={title} />
+      <h3>{title}</h3>
+      <p>{description}</p>
+    </div>
+  );
+}
+
+export default Card;
+```
 
 ## Props and Data Flow
 
@@ -72,9 +198,50 @@ Props are read-only properties used to pass data between components. They enable
 
 ### Example: Student Component
 
-- Pass props like `name`, `age`, and `isStudent` to the component.
-- Use PropTypes to ensure correct data types for props.
-- Default Props: Provide default values for props when not supplied by the parent component.
+```jsx
+// Student.js
+import React from 'react';
+import PropTypes from 'prop-types';
+
+function Student({ name, age, isStudent }) {
+  return (
+    <div>
+      <h2>{name}</h2>
+      <p>Age: {age}</p>
+      <p>Status: {isStudent ? 'Student' : 'Not a Student'}</p>
+    </div>
+  );
+}
+
+Student.propTypes = {
+  name: PropTypes.string.isRequired,
+  age: PropTypes.number.isRequired,
+  isStudent: PropTypes.bool.isRequired,
+};
+
+Student.defaultProps = {
+  isStudent: true,
+};
+
+export default Student;
+```
+
+```jsx
+// App.js
+import React from 'react';
+import Student from './Student';
+
+function App() {
+  return (
+    <div>
+      <Student name="Alice" age={20} isStudent={true} />
+      <Student name="Bob" age={25} isStudent={false} />
+    </div>
+  );
+}
+
+export default App;
+```
 
 ## Conditional Rendering
 
@@ -88,9 +255,39 @@ React allows rendering components based on conditions using JavaScript logic.
 
 ### Example: User Greeting Component
 
-- Check if the user is logged in.
-- Render different components and styles based on login status.
+```jsx
+// Greeting.js
+import React from 'react';
+
+function Greeting({ isLoggedIn }) {
+  if (isLoggedIn) {
+    return <h1>Welcome back!</h1>;
+  } else {
+    return <h1>Please sign up.</h1>;
+  }
+}
+
+export default Greeting;
+```
+
+```jsx
+// App.js
+import React from 'react';
+import Greeting from './Greeting';
+
+function App() {
+  const userLoggedIn = true;
+
+  return (
+    <div>
+      <Greeting isLoggedIn={userLoggedIn} />
+    </div>
+  );
+}
+
+export default App;
+```
 
 ---
 
-By following this structured approach, you'll gain a solid understanding of React fundamentals and be able to build dynamic and efficient web applications. Happy coding!
+By following this structured approach and utilizing the code examples provided, you'll gain a solid understanding of React fundamentals and be able to build dynamic and efficient web applications. Happy coding!
