@@ -1,6 +1,7 @@
 
 
 # React Full Course for Free ⚛️ (2024) 
+<img src="https://wakatime.com/badge/github/Adesh-111/React-Youtube-Course.svg" />
 
 This repository contains resources and notes based on the "React Full Course for Free ⚛️ (2024)" video tutorial. This course provides a comprehensive introduction to React, a popular JavaScript library for building user interfaces.
 
