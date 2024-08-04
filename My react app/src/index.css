@@ -85,3 +85,39 @@
   border-radius: 10px;
   padding: 10px;
 }
+
+.counter{
+  text-align: center;
+}
+
+.counter h1 {
+  color: black;
+  background-color: darkgoldenrod;
+  padding: 10px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 100px ;
+  /* width: 200px; */
+  
+}
+
+.counter button{
+  padding: 10px;
+  margin: 20px;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  color: white;
+  font-size: 20px;
+  border: 0;
+  border-radius: 5px;
+}
+
+.counter-item-1{
+  background-color: green;
+}
+
+.counter-item-2{
+  background-color: blue;
+}
+
+.counter-item-3{
+  background-color: red;
+}
