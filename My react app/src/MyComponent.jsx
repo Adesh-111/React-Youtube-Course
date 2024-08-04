@@ -1,34 +1,52 @@
 import React, { useState } from "react";
 
 function MyComponent() {
-  const [name, setName] = useState("Guest");
-  const [age, setAge] = useState(0);
-  const [married, setMarried] = useState(false);
+   const [name, setName] = useState("Guest");
+   const [quantity, setQuantity] = useState();
+   const [payment, setPayment] = useState("");
+   const [shipping, setShipping] = useState();
 
-  function updateName() {
-    setName("Adesh");
-  }
+   function handleChange(e){
+    setName(e.target.value)
+   }
 
-  function incrementName() {
-    setAge(age + 1);
-  }
+   function handleQuantity(e){
+    setQuantity(e.target.value);
+   }
 
-  function updateMarriedStatus(){
-    setMarried(!married);
-  }
+   function handlePayment(e){
+    setPayment(e.target.value)
+   }
 
-  return (
+   function handleShipping(e){
+    setShipping(e.target.value);
+   }
+
+   return(
     <div>
-      <p>Name : {name}</p>
-      <button onClick={updateName}>Set Name</button>
+        <input value={name} onChange={handleChange} />
+        <p>Name: {name}</p>
+        <input value={quantity} type="number" onChange={handleQuantity} />
+        <p>Quantity : {quantity}</p>
+        <select onChange={handlePayment}>
+            <option value="">Select</option>
+            <option value="Visa">Visa</option>
+            <option value="Master-card">Master Card</option>
+        </select>
+        <p>{payment}</p>
 
-      <p>Age : {age}</p>
-      <button onClick={incrementName}>Increment age</button>
+        <label htmlFor="">
+            <input type="radio" value="Pickup" checked ={shipping ==="Pickup"} onChange={handleShipping} />
+            Pickup
+        </label> <br />
+        <label htmlFor="">
+            <input type="radio" value="Delivery" checked ={shipping ==="Delivery"} onChange={handleShipping} />
+            Delivery
+        </label>
 
-      <p>isMarried : {married ? "Yes" : "No"}</p>
-      <button onClick={updateMarriedStatus}>Toggle Status</button>
+        <p>{shipping}</p>
     </div>
-  );
+   )
 }
 
 export default MyComponent;
