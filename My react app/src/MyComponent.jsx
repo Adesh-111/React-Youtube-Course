@@ -1,60 +1,32 @@
 import React, { useState } from "react";
 
 function MyComponent() {
-  const [name, setName] = useState("Guest");
-  const [quantity, setQuantity] = useState();
-  const [payment, setPayment] = useState("");
-  const [shipping, setShipping] = useState();
+  const [foods, setFoods] = useState(["Apple", "Orange", "Banana"]);
 
-  function handleChange(e) {
-    setName(e.target.value);
+  function handleFood() {
+    const newFood = document.getElementById("foodInput").value;
+    document.getElementById("foodInput").value = "";
+
+    setFoods((f) => [...f, newFood]);
   }
 
-  function handleQuantity(e) {
-    setQuantity(e.target.value);
-  }
-
-  function handlePayment(e) {
-    setPayment(e.target.value);
-  }
-
-  function handleShipping(e) {
-    setShipping(e.target.value);
+  function handleRemoveFood(index) {
+    setFoods(foods.filter((element, i) => i !== index));
   }
 
   return (
-    <div>
-      <input value={name} onChange={handleChange} />
-      <p>Name: {name}</p>
-      <input value={quantity} type="number" onChange={handleQuantity} />
-      <p>Quantity : {quantity}</p>
-      <select onChange={handlePayment}>
-        <option value="">Select</option>
-        <option value="Visa">Visa</option>
-        <option value="Master-card">Master Card</option>
-      </select>
-      <p>{payment}</p>
-      <label htmlFor="">
-        <input
-          type="radio"
-          value="Pickup"
-          checked={shipping === "Pickup"}
-          onChange={handleShipping}
-        />
-        Pickup
-      </label>{" "}
-      <br />
-      <label htmlFor="">
-        <input
-          type="radio"
-          value="Delivery"
-          checked={shipping === "Delivery"}
-          onChange={handleShipping}
-        />
-        Delivery
-      </label>
-      <p>{shipping}</p>
-    </div>
+    <>
+      <h2>List of Foods</h2>
+      <ul>
+        {foods.map((food, index) => (
+          <li key={index} onClick={() => handleRemoveFood(index)}>
+            {food}
+          </li>
+        ))}
+      </ul>
+      <input type="text" id="foodInput" placeholder="Enter the Food name" />
+      <button onClick={handleFood}>Add Food</button>
+    </>
   );
 }
 
