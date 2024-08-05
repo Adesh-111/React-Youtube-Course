@@ -1,5 +1,5 @@
 
-# React Full Course for Free ⚛️ (2024)
+# [React Full Course for Free ⚛️ (2024)](https://youtu.be/CgkZ7MvWUAA?si=Atyj69cuti6I9RR-)
 
 <img src="https://wakatime.com/badge/github/Adesh-111/React-Youtube-Course.svg" />
 
@@ -572,6 +572,6 @@ This course provided a comprehensive introduction to React, covering everything 
 - [React Documentation](https://reactjs.org/docs/getting-started.html)
 - [MDN Web Docs - React](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array)
 - [PropTypes Documentation](https://reactjs.org/docs/typechecking-with-proptypes.html)
-- [React Full Course for Free (2024) Video](https://www.youtube.com/watch?v=b9eMGE7QtTk)
+- [React Full Course for Free (2024) Video](https://youtu.be/CgkZ7MvWUAA?si=Atyj69cuti6I9RR-)
 
 ---
