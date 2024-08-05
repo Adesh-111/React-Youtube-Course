@@ -1,6 +1,5 @@
+# React Full Course for Free ⚛️ (2024)
 
-
-# React Full Course for Free ⚛️ (2024) 
 <img src="https://wakatime.com/badge/github/Adesh-111/React-Youtube-Course.svg" />
 
 This repository contains resources and notes based on the "React Full Course for Free ⚛️ (2024)" video tutorial. This course provides a comprehensive introduction to React, a popular JavaScript library for building user interfaces.
@@ -63,7 +62,7 @@ React components are reusable sections of code that can be composed to build com
 
 ```jsx
 // Header.js
-import React from 'react';
+import React from "react";
 
 function Header() {
   return (
@@ -85,7 +84,7 @@ export default Header;
 
 ```jsx
 // Footer.js
-import React from 'react';
+import React from "react";
 
 function Footer() {
   return (
@@ -104,9 +103,9 @@ Use JSX fragments (`<> </>`) to return multiple components from a single functio
 
 ```jsx
 // App.js
-import React from 'react';
-import Header from './Header';
-import Footer from './Footer';
+import React from "react";
+import Header from "./Header";
+import Footer from "./Footer";
 
 function App() {
   return (
@@ -132,7 +131,7 @@ export default App;
 
 ```jsx
 // Card.js
-import React from 'react';
+import React from "react";
 
 function Card({ image, title, description }) {
   return (
@@ -164,7 +163,7 @@ There are three methods for styling React components:
   padding: 16px;
   margin: 16px;
   border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 4px rgb(0, 0, 0, 0.1);
 }
 
 .card img {
@@ -184,8 +183,8 @@ There are three methods for styling React components:
 
 ```jsx
 // Card.js (with styling)
-import React from 'react';
-import './Card.css';
+import React from "react";
+import "./Card.css";
 
 function Card({ image, title, description }) {
   return (
@@ -208,15 +207,15 @@ Props are read-only properties used to pass data between components. They enable
 
 ```jsx
 // Student.js
-import React from 'react';
-import PropTypes from 'prop-types';
+import React from "react";
+import PropTypes from "prop-types";
 
 function Student({ name, age, isStudent }) {
   return (
     <div>
       <h2>{name}</h2>
       <p>Age: {age}</p>
-      <p>Status: {isStudent ? 'Student' : 'Not a Student'}</p>
+      <p>Status: {isStudent ? "Student" : "Not a Student"}</p>
     </div>
   );
 }
@@ -236,8 +235,8 @@ export default Student;
 
 ```jsx
 // App.js
-import React from 'react';
-import Student from './Student';
+import React from "react";
+import Student from "./Student";
 
 function App() {
   return (
@@ -265,7 +264,7 @@ React allows rendering components based on conditions using JavaScript logic.
 
 ```jsx
 // Greeting.js
-import React from 'react';
+import React from "react";
 
 function Greeting({ isLoggedIn }) {
   if (isLoggedIn) {
@@ -280,8 +279,8 @@ export default Greeting;
 
 ```jsx
 // App.js
-import React from 'react';
-import Greeting from './Greeting';
+import React from "react";
+import Greeting from "./Greeting";
 
 function App() {
   const userLoggedIn = true;
@@ -303,13 +302,15 @@ When rendering lists in React, it is important to provide a unique key for each 
 ### Example
 
 ```jsx
-import React from 'react';
+import React from "react";
 
 const FruitList = ({ fruits }) => {
   return (
     <ul>
-      {fruits.map(fruit => (
-        <li key={fruit.id}>{fruit.name} - {fruit.calories} calories</li>
+      {fruits.map((fruit) => (
+        <li key={fruit.id}>
+          {fruit.name} - {fruit.calories} calories
+        </li>
       ))}
     </ul>
   );
@@ -317,12 +318,12 @@ const FruitList = ({ fruits }) => {
 
 // Usage
 const fruits = [
-  { id: 1, name: 'Apple', calories: 95 },
-  { id: 2, name: 'Banana', calories: 105 },
-  { id: 3, name: 'Orange', calories: 62 },
+  { id: 1, name: "Apple", calories: 95 },
+  { id: 2, name: "Banana", calories: 105 },
+  { id: 3, name: "Orange", calories: 62 },
 ];
 
-<FruitList fruits={fruits} />
+<FruitList fruits={fruits} />;
 ```
 
 In this example, each fruit object has a unique `id` used as a key for the list items.
@@ -334,25 +335,24 @@ JavaScript's array methods like `sort` and `filter` can be used to manipulate ar
 ### Example
 
 ```jsx
-import React from 'react';
+import React from "react";
 
 const SortedFruitList = ({ fruits }) => {
   const sortedFruits = [...fruits].sort((a, b) => a.name.localeCompare(b.name));
-  const lowCalFruits = fruits.filter(fruit => fruit.calories < 100);
+  const lowCalFruits = fruits.filter((fruit) => fruit.calories < 100);
 
   return (
     <div>
       <h2>Sorted Fruits</h2>
       <ul>
-        {sortedFruits.map(fruit => (
+        {sortedFruits.map((fruit) => (
           <li key={fruit.id}>{fruit.name}</li>
         ))}
       </ul>
 
-
       <h2>Low-Calorie Fruits</h2>
       <ul>
-        {lowCalFruits.map(fruit => (
+        {lowCalFruits.map((fruit) => (
           <li key={fruit.id}>{fruit.name}</li>
         ))}
       </ul>
@@ -362,12 +362,12 @@ const SortedFruitList = ({ fruits }) => {
 
 // Usage
 const fruits = [
-  { id: 1, name: 'Apple', calories: 95 },
-  { id: 2, name: 'Banana', calories: 105 },
-  { id: 3, name: 'Orange', calories: 62 },
+  { id: 1, name: "Apple", calories: 95 },
+  { id: 2, name: "Banana", calories: 105 },
+  { id: 3, name: "Orange", calories: 62 },
 ];
 
-<SortedFruitList fruits={fruits} />
+<SortedFruitList fruits={fruits} />;
 ```
 
 ## Reusable Components with Props
@@ -401,7 +401,7 @@ React's `useState` hook is used to manage state in functional components, such a
 ### Example
 
 ```jsx
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
 const ClickCounter = () => {
   const [count, setCount] = useState(0);
@@ -428,10 +428,10 @@ React components can handle form input changes using the `useState` hook to mana
 ### Example
 
 ```jsx
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
 const UserForm = () => {
-  const [name, setName] = useState('');
+  const [name, setName] = useState("");
 
   const handleChange = (event) => {
     setName(event.target.value);
@@ -439,7 +439,12 @@ const UserForm = () => {
 
   return (
     <div>
-      <input type="text" value={name} onChange={handleChange} placeholder="Enter your name" />
+      <input
+        type="text"
+        value={name}
+        onChange={handleChange}
+        placeholder="Enter your name"
+      />
       <p>Hello, {name}!</p>
     </div>
   );
@@ -452,56 +457,64 @@ export default UserForm;
 import React, { useState } from "react";
 
 function MyComponent() {
-   const [name, setName] = useState("Guest");
-   const [quantity, setQuantity] = useState();
-   const [payment, setPayment] = useState("");
-   const [shipping, setShipping] = useState();
+  const [name, setName] = useState("Guest");
+  const [quantity, setQuantity] = useState();
+  const [payment, setPayment] = useState("");
+  const [shipping, setShipping] = useState();
 
-   function handleChange(e){
-    setName(e.target.value)
-   }
+  function handleChange(e) {
+    setName(e.target.value);
+  }
 
-   function handleQuantity(e){
+  function handleQuantity(e) {
     setQuantity(e.target.value);
-   }
+  }
 
-   function handlePayment(e){
-    setPayment(e.target.value)
-   }
+  function handlePayment(e) {
+    setPayment(e.target.value);
+  }
 
-   function handleShipping(e){
+  function handleShipping(e) {
     setShipping(e.target.value);
-   }
+  }
 
-   return(
+  return (
     <div>
-        <input value={name} onChange={handleChange} />
-        <p>Name: {name}</p>
-        <input value={quantity} type="number" onChange={handleQuantity} />
-        <p>Quantity : {quantity}</p>
-        <select onChange={handlePayment}>
-            <option value="">Select</option>
-            <option value="Visa">Visa</option>
-            <option value="Master-card">Master Card</option>
-        </select>
-        <p>{payment}</p>
-
-        <label htmlFor="">
-            <input type="radio" value="Pickup" checked ={shipping ==="Pickup"} onChange={handleShipping} />
-            Pickup
-        </label> <br />
-        <label htmlFor="">
-            <input type="radio" value="Delivery" checked ={shipping ==="Delivery"} onChange={handleShipping} />
-            Delivery
-        </label>
-
-        <p>{shipping}</p>
+      <input value={name} onChange={handleChange} />
+      <p>Name: {name}</p>
+      <input value={quantity} type="number" onChange={handleQuantity} />
+      <p>Quantity : {quantity}</p>
+      <select onChange={handlePayment}>
+        <option value="">Select</option>
+        <option value="Visa">Visa</option>
+        <option value="Master-card">Master Card</option>
+      </select>
+      <p>{payment}</p>
+      <label htmlFor="">
+        <input
+          type="radio"
+          value="Pickup"
+          checked={shipping === "Pickup"}
+          onChange={handleShipping}
+        />
+        Pickup
+      </label>{" "}
+      <br />
+      <label htmlFor="">
+        <input
+          type="radio"
+          value="Delivery"
+          checked={shipping === "Delivery"}
+          onChange={handleShipping}
+        />
+        Delivery
+      </label>
+      <p>{shipping}</p>
     </div>
-   )
+  );
 }
 
 export default MyComponent;
-
 ```
 
 In this example, the `UserForm` component manages the state of the `name` input field using the `useState` hook.
