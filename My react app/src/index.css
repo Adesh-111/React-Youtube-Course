@@ -162,3 +162,99 @@
   width: 100px;
   height: 100px;
 }
+
+.TodoList{
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.TodoList h1{
+  text-align: center;
+  font-weight: 400;
+  font-size: 50px;
+  color: purple;
+  border:  3px solid purple;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.TodoList input{
+  width: 150px;
+  height: 25px;
+  border: 2px solid black;
+  border-radius: 5px;
+  padding: 10px;
+}
+
+.add-button{
+  color: white;
+  background-color: rgb(127, 26, 170);
+  padding: 10px;
+  border-radius: 3px;
+  border: 0;
+  margin: 10px;
+  transition: 0.5s ease;
+}
+
+ol span{
+  font-size: 20px;
+  padding: 5px;
+  margin: 5px;
+  flex : 1;
+}
+
+ol{
+  border: 3px solid gray;
+  padding: 30px;
+  border-radius: 15px;
+ 
+}
+li{
+  margin: 10px;
+  padding: 5px;
+  display: flex;
+  align-items: center;
+  margin-right: 10px;
+}
+
+
+button{
+  color: white;
+  padding: 10px;
+  border-radius: 3px;
+  border: 0; margin-right: 5px;
+  transition: 0.5s ease;
+}
+
+.delete-button{
+  background-color: red;
+}
+
+.move-button{
+  background-color: green;
+}
+
+.down-button{
+  background-color: blue;
+}
+
+.add-button:hover{
+  background-color: rgb(74, 19, 74);
+}
+
+.delete-button:hover{
+  background-color: rgb(175, 29, 29);
+}
+
+.move-button:hover{
+  background-color: darkgreen;
+}
+
+.down-button:hover{
+  background-color: darkblue;
+}
