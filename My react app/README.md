@@ -18,7 +18,7 @@ This repository contains resources and notes based on the "React Full Course for
 9. [Reusable Components with Props](#reusable-components-with-props)
 10. [Handling Click Events with useState](#handling-click-events-with-usestate)
 11. [Stateful Components with Input Handling](#stateful-components-with-input-handling)
-12. [Managing State with Updator Functions](#managing-state-with-updator-functions)
+12. [Managing State with Updater Functions](#managing-state-with-updater-functions)
 13. [Handling Arrays](#handling-arrays)
 14. [Managing Objects](#managing-objects)
 15. [Color Picker Component](#color-picker-component)
@@ -447,7 +447,7 @@ const Form = () => {
 <Form />;
 ```
 
-## Managing State with Updator Functions
+## Managing State with Updater Functions
 
 Updating the state in React can be done with updater functions to ensure the state is updated correctly.
 
@@ -656,6 +656,71 @@ function TodoList() {
 
 export default TodoList;
 
+```
+
+## useEffect()
+
+The useEffect hook is a built-in React hook that lets you perform side effects in your functional components. It serves as a way to manage lifecycle events such as fetching data, subscribing to services, directly manipulating the DOM, or cleaning up resources. useEffect helps replace several lifecycle methods that were previously only available in class components, such as componentDidMount, componentDidUpdate, and componentWillUnmount.
+
+```jsx
+import React, { useState } from "react";
+import { useEffect } from "react";
+
+function MyComponent() {
+  const [count, setCount] = useState(0);
+  const [color, setColor] = useState("green");
+
+  useEffect(() => {
+    document.title = Count: ${count} ${color};
+  }, [count, color]);
+
+  function addCount() {
+    setCount((c) => c + 1);
+  }
+
+  function changeColor() {
+    setColor((c) => (c == "green" ? "Red" : "green"));
+  }
+
+  return (
+    <>
+      <h1 style={{ color: color }}>Color: {count}</h1>
+      <button onClick={addCount}>Add</button>
+      <button onClick={changeColor}>Change</button>
+    </>
+  );
+}
+
+export default MyComponent;
+```
+```jsx
+import React, { useState } from "react";
+import { useEffect } from "react";
+
+function MyComponent() {
+  const [width, setWidth] = useState(window.innerWidth);
+  const [height, setHeight] = useState(window.innerHeight);
+
+  useEffect(() => {
+    window.addEventListener("resize", handleResize);
+  }, [width, height]);
+
+  function handleResize() {
+    setWidth(window.innerWidth);
+    setHeight(window.innerHeight);
+  }
+
+  return (
+    <>
+      <p onChange={handleResize}>
+        Window width : {width} px <br />
+        Window height : {height} px
+      </p>
+    </>
+  );
+}
+
+export default MyComponent;
 ```
 
 ## Conclusion
