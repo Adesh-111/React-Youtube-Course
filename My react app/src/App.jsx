@@ -8,13 +8,14 @@ import MyComponent from "./MyComponent"
 import Counter from "./Counter"
 import ColorPicker from "./ColorPicker"
 import TodoList from "./TodoList"
+import DigitalClock from "./DigitalClock"
 
 
 function App() {
 
   return (
     <>
-       <MyComponent />
+       <DigitalClock />
     </>
 
   )

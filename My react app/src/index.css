@@ -1,3 +1,9 @@
+body{
+  margin: 0;
+  padding: 0;
+}
+
+
 .card{
   border: 1px solid lightgray;
   border-radius: 10px;
@@ -258,3 +264,29 @@ li{
 .down-button:hover{
   background-color: darkblue;
 }
+
+.clock-container{
+  background-image: url("./assets/bg-image.webp");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  background-attachment: fixed;
+  margin: 0;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+}
+
+.clock{
+  font-size: 6rem;
+  color: white;
+  font-family: monospace;
+  font-weight: bold;
+  text-align: center;
+  text-shadow: 3px 3px 5px black;
+  backdrop-filter: blur(5px);
+  width: 100vw;
+}
+
