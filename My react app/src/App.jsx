@@ -10,13 +10,14 @@ import ColorPicker from "./ColorPicker"
 import TodoList from "./TodoList"
 import DigitalClock from "./DigitalClock"
 import ComponentA from "./ComponentA"
+import StopWatch from "./Stopwatch"
 
 
 function App() {
 
   return (
     <>
-       <MyComponent />
+       <StopWatch />
     </>
 
   )
