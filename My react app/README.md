@@ -1,8 +1,6 @@
 
 # [React Full Course for Free ⚛️ (2024)](https://youtu.be/CgkZ7MvWUAA?si=Atyj69cuti6I9RR-)
 
-<img src="https://wakatime.com/badge/github/Adesh-111/React-Youtube-Course.svg" />
-
 This repository contains resources and notes based on the "React Full Course for Free ⚛️ (2024)" video tutorial. This course provides a comprehensive introduction to React, a popular JavaScript library for building user interfaces.
 
 ## Table of Contents
@@ -22,9 +20,14 @@ This repository contains resources and notes based on the "React Full Course for
 13. [Handling Arrays](#handling-arrays)
 14. [Managing Objects](#managing-objects)
 15. [Color Picker Component](#color-picker-component)
-16. [ToDo LIST](#todo-list)
-17. [Conclusion](#conclusion)
-18. [References](#references)
+16. [ToDo List](#todo-list)
+17. [useEffect Hook](#useeffect-hook)
+18. [Digital Clock Component](#digital-clock-component)
+19. [useContext Example](#usecontext-example)
+20. [useRef Example](#useref-example)
+21. [Stopwatch Component](#stopwatch-component)
+22. [Conclusion](#conclusion)
+23. [References](#references)
 
 ## Introduction
 
@@ -334,8 +337,6 @@ const fruits = [
 <FruitList fruits={fruits} />;
 ```
 
-In this example, each fruit object has a unique `id` used as a key for the list items.
-
 ## Sorting and Filtering Arrays
 
 JavaScript's array methods like `sort` and `filter` can be used to manipulate arrays before rendering them in React.
@@ -346,69 +347,68 @@ JavaScript's array methods like `sort` and `filter` can be used to manipulate ar
 import React from "react";
 
 const SortedFruitList = ({ fruits }) => {
-  const sortedFruits = [...fruits].sort((a, b) => a.calories - b.calories);
+  const sorted
 
+Fruits = fruits.sort((a, b) => a.name.localeCompare(b.name));
   return (
     <ul>
       {sortedFruits.map((fruit) => (
-        <li key={fruit.id}>
-          {fruit.name} - {fruit.calories} calories
-        </li>
+        <li key={fruit.id}>{fruit.name}</li>
       ))}
     </ul>
   );
 };
 
-// Usage
-const fruits = [
-  { id: 1, name: "Apple", calories: 95 },
-  { id: 2, name: "Banana", calories: 105 },
-  { id: 3, name: "Orange", calories: 62 },
-];
-
-<SortedFruitList fruits={fruits} />;
+const FilteredFruitList = ({ fruits }) => {
+  const filteredFruits = fruits.filter((fruit) => fruit.calories < 100);
+  return (
+    <ul>
+      {filteredFruits.map((fruit) => (
+        <li key={fruit.id}>{fruit.name}</li>
+      ))}
+    </ul>
+  );
+};
 ```
 
 ## Reusable Components with Props
 
-Props can be used to make components reusable by passing different data to them.
+Props can be used to create reusable components that can be configured differently for each use.
 
 ### Example: Button Component
 
 ```jsx
 import React from "react";
 
-const Button = ({ label, onClick }) => {
+function Button({ label, onClick }) {
   return <button onClick={onClick}>{label}</button>;
-};
+}
 
 // Usage
-<Button label="Click me" onClick={() => alert("Button clicked!")} />;
+<Button label="Click Me" onClick={() => alert("Button clicked!")} />;
 ```
 
 ## Handling Click Events with useState
 
-The `useState` hook allows managing component state in functional components.
+`useState` is a React hook that allows you to add state to functional components. You can use it to manage the state of user interactions, such as click events.
 
-### Example: Counter Component
+### Example
 
 ```jsx
 import React, { useState } from "react";
 
-const Counter = () => {
+function Counter() {
   const [count, setCount] = useState(0);
 
   const increment = () => setCount(count + 1);
-  const decrement = () => setCount(count - 1);
 
   return (
     <div>
       <p>Count: {count}</p>
       <button onClick={increment}>Increment</button>
-      <button onClick={decrement}>Decrement</button>
     </div>
   );
-};
+}
 
 // Usage
 <Counter />;
@@ -416,52 +416,43 @@ const Counter = () => {
 
 ## Stateful Components with Input Handling
 
-React's `useState` can also be used to handle input changes and form submissions.
+Stateful components can manage user input by storing and updating input values in the component's state.
 
-### Example: Form Component
+### Example: Input Component
 
 ```jsx
 import React, { useState } from "react";
 
-const Form = () => {
-  const [name, setName] = useState("");
+function TextInput() {
+  const [text, setText] = useState("");
 
-  const handleChange = (event) => {
-    setName(event.target.value);
-  };
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    alert(`Form submitted with name: ${name}`);
-  };
+  const handleChange = (e) => setText(e.target.value);
 
   return (
-    <form onSubmit={handleSubmit}>
-      <input type="text" value={name} onChange={handleChange} />
-      <button type="submit">Submit</button>
-    </form>
+    <div>
+      <input type="text" value={text} onChange={handleChange} />
+      <p>Input: {text}</p>
+    </div>
   );
-};
+}
 
 // Usage
-<Form />;
+<TextInput />;
 ```
 
 ## Managing State with Updater Functions
 
-Updating the state in React can be done with updater functions to ensure the state is updated correctly.
+Updater functions can be used with `useState` to update the state based on the current state value.
 
 ### Example
 
 ```jsx
 import React, { useState } from "react";
 
-const UpdaterExample = () => {
+function Counter() {
   const [count, setCount] = useState(0);
 
-  const increment = () => {
-    setCount((prevCount) => prevCount + 1);
-  };
+  const increment = () => setCount((prevCount) => prevCount + 1);
 
   return (
     <div>
@@ -469,269 +460,358 @@ const UpdaterExample = () => {
       <button onClick={increment}>Increment</button>
     </div>
   );
-};
+}
 
 // Usage
-<UpdaterExample />;
+<Counter />;
 ```
 
 ## Handling Arrays
 
-Managing arrays in React involves using `useState` to keep track of array state and methods like `push`, `pop`, `splice`, and `filter` for modifying them.
+React allows managing arrays in state using `useState`. You can add, remove, or update items in the array.
 
-### Example
+### Example: To-Do List
 
 ```jsx
 import React, { useState } from "react";
 
-const ArrayExample = () => {
-  const [items, setItems] = useState([]);
+function ToDoList() {
+  const [tasks, setTasks] = useState([]);
+  const [task, setTask] = useState("");
 
-  const addItem = () => {
-    setItems([...items, { id: items.length, name: `Item ${items.length}` }]);
+  const addTask = () => {
+    setTasks([...tasks, { id: tasks.length, text: task }]);
+    setTask("");
   };
 
   return (
     <div>
-      <button onClick={addItem}>Add Item</button>
+      <input
+        type="text"
+        value={task}
+        onChange={(e) => setTask(e.target.value)}
+      />
+      <button onClick={addTask}>Add Task</button>
       <ul>
-        {items.map((item) => (
-          <li key={item.id}>{item.name}</li>
+        {tasks.map((task) => (
+          <li key={task.id}>{task.text}</li>
         ))}
       </ul>
     </div>
   );
-};
+}
 
 // Usage
-<ArrayExample />;
+<ToDoList />;
 ```
 
 ## Managing Objects
 
-Similar to arrays, objects in React state can be managed using `useState`.
+State in React can also manage objects. When updating an object, spread the previous state to retain existing properties.
 
-### Example
+### Example: User Profile
 
 ```jsx
 import React, { useState } from "react";
 
-const ObjectExample = () => {
-  const [user, setUser] = useState({ name: "John", age: 30 });
+function UserProfile() {
+  const [user, setUser] = useState({
+    name: "Alice",
+    age: 25,
+    city: "New York",
+  });
 
-  const updateName = () => {
-    setUser((prevUser) => ({ ...prevUser, name: "Jane" }));
-  };
+  const updateUser = () =>
+    setUser((prevUser) => ({ ...prevUser, city: "San Francisco" }));
 
   return (
     <div>
-      <p>Name: {user.name}</p>
+      <h2>{user.name}</h2>
       <p>Age: {user.age}</p>
-      <button onClick={updateName}>Change Name</button>
+      <p>City: {user.city}</p>
+      <button onClick={updateUser}>Move to San Francisco</button>
     </div>
   );
-};
+}
 
 // Usage
-<ObjectExample />;
+<UserProfile />;
 ```
 
 ## Color Picker Component
 
-Creating a color picker component involves using `useState` to track the selected color and updating it based on user interaction.
+A color picker allows users to select a color, with the chosen color displayed as feedback.
 
 ### Example
 
 ```jsx
 import React, { useState } from "react";
 
-const ColorPicker = () => {
+function ColorPicker() {
   const [color, setColor] = useState("#000000");
 
-  const handleChange = (event) => {
-    setColor(event.target.value);
+  const handleColorChange = (e) => setColor(e.target.value);
+
+  return (
+    <div>
+      <input type="color" value={color} onChange={handleColorChange} />
+      <p>Selected Color: {color}</p>
+    </div>
+  );
+}
+
+// Usage
+<ColorPicker />;
+```
+
+## ToDo List
+
+A ToDo list allows users to add, remove, and mark tasks as complete.
+
+### Example
+
+```jsx
+import React, { useState } from "react";
+
+function ToDoList() {
+  const [tasks, setTasks] = useState([]);
+  const [task, setTask] = useState("");
+
+  const addTask = () => {
+    setTasks([...tasks, { id: tasks.length, text: task, completed: false }]);
+    setTask("");
+  };
+
+  const toggleTaskCompletion = (taskId) => {
+    setTasks(
+      tasks.map((task) =>
+        task.id === taskId
+          ? { ...task, completed: !task.completed }
+          : task
+      )
+    );
   };
 
   return (
     <div>
-      <input type="color" value={color} onChange={handleChange} />
-      <p>Selected Color: {color}</p>
+      <input
+        type="text"
+        value={task}
+        onChange={(e) => setTask(e.target.value)}
+      />
+      <button onClick={addTask}>Add Task</button>
+      <ul>
+        {tasks.map((task) => (
+          <li
+            key={task.id}
+            onClick={() => toggleTaskCompletion(task.id)}
+            style={{
+              textDecoration: task.completed ? "line-through" : "none",
+            }}
+          >
+            {task.text}
+          </li>
+        ))}
+      </ul>
     </div>
   );
-};
+}
 
 // Usage
-<ColorPicker />;
-
+<ToDoList />;
 ```
 
-## TODO LIST
-```jsx
-import React, { useState } from "react";
+## useEffect Hook
 
-function TodoList() {
-  const [todos, setTodos] = useState(["WakeUp", "Code Daily", "Eat"]);
-  const [newTask, setNewTask] = useState("");
+The `useEffect` hook allows you to perform side effects in functional components, such as fetching data or updating the DOM.
 
-  function handleTasks(e) {
-    setNewTask(e.target.value);
-  }
-
-  function addTask() {
-    if (newTask.trim() !== "") {
-      setTodos((t) => [...t, newTask]);
-
-      setNewTask("");
-    }
-  }
-
-  function deleteTask(index) {
-    setTodos(todos.filter((_, i) => i !== index));
-  }
-
-  function moveTaskUp(index) {
-    if (index > 0) {
-      const updateTasks = [...todos];
-
-      [updateTasks[index], updateTasks[index - 1]] = [
-        updateTasks[index - 1],
-        updateTasks[index],
-      ];
-      setTodos(updateTasks);
-    }
-  }
-  function moveTaskDown(index) {
-    if (index < todos.length - 1) {
-      const downTasks = [...todos];
-
-      [downTasks[index + 1], downTasks[index]] = [
-        downTasks[index],
-        downTasks[index + 1],
-      ];
-      setTodos(downTasks);
-    }
-  }
-
-  return (
-    <>
-      <div className="TodoList">
-        <h1>ToDoList</h1>
-        <div>
-          <input
-            type="text"
-            placeholder="Enter the Task"
-            value={newTask}
-            onChange={handleTasks}
-          />
-          <button className="add-button" onClick={addTask}>
-            Add task
-          </button>
-        </div>
-        <ol>
-          {todos.map((todo, index) => (
-            <li key={index}>
-              <span>{todo}</span>
-              <button
-                onClick={() => deleteTask(index)}
-                className="delete-button"
-              >
-                Delete
-              </button>
-              <button onClick={() => moveTaskUp(index)} className="move-button">
-                UP
-              </button>
-              <button
-                onClick={() => moveTaskDown(index)}
-                className="down-button"
-              >
-                Down
-              </button>
-            </li>
-          ))}
-        </ol>
-      </div>
-    </>
-  );
-}
-
-export default TodoList;
-
-```
-
-## useEffect()
-
-The useEffect hook is a built-in React hook that lets you perform side effects in your functional components. It serves as a way to manage lifecycle events such as fetching data, subscribing to services, directly manipulating the DOM, or cleaning up resources. useEffect helps replace several lifecycle methods that were previously only available in class components, such as componentDidMount, componentDidUpdate, and componentWillUnmount.
+### Example: Fetching Data
 
 ```jsx
-import React, { useState } from "react";
-import { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 
-function MyComponent() {
-  const [count, setCount] = useState(0);
-  const [color, setColor] = useState("green");
+function DataFetcher() {
+  const [data, setData] = useState([]);
 
   useEffect(() => {
-    document.title = Count: ${count} ${color};
-  }, [count, color]);
-
-  function addCount() {
-    setCount((c) => c + 1);
-  }
-
-  function changeColor() {
-    setColor((c) => (c == "green" ? "Red" : "green"));
-  }
+    fetch("https://jsonplaceholder.typicode.com/posts")
+      .then((response) => response.json())
+      .then((data) => setData(data.slice(0, 10)));
+  }, []);
 
   return (
-    <>
-      <h1 style={{ color: color }}>Color: {count}</h1>
-      <button onClick={addCount}>Add</button>
-      <button onClick={changeColor}>Change</button>
-    </>
+    <ul>
+      {data.map((item) => (
+        <li key={item.id}>{item.title}</li>
+      ))}
+    </ul>
   );
 }
 
-export default MyComponent;
+// Usage
+<DataFetcher />;
 ```
-```jsx
-import React, { useState } from "react";
-import { useEffect } from "react";
 
-function MyComponent() {
-  const [width, setWidth] = useState(window.innerWidth);
-  const [height, setHeight] = useState(window.innerHeight);
+## Digital Clock Component
+
+A digital clock component displays the current time and updates every second using `useEffect` and `setInterval`.
+
+### Example
+
+```jsx
+import React, { useState, useEffect } from "react";
+
+function DigitalClock() {
+  const [time, setTime] = useState(new Date());
 
   useEffect(() => {
-    window.addEventListener("resize", handleResize);
-  }, [width, height]);
+    const timerId = setInterval(() => {
+      setTime(new Date());
+    }, 1000);
 
-  function handleResize() {
-    setWidth(window.innerWidth);
-    setHeight(window.innerHeight);
-  }
+    return () => clearInterval(timerId);
+  }, []);
 
   return (
-    <>
-      <p onChange={handleResize}>
-        Window width : {width} px <br />
-        Window height : {height} px
-      </p>
-    </>
+    <div>
+      <h2>{time.toLocaleTimeString()}</h2>
+    </div>
   );
 }
 
-export default MyComponent;
+// Usage
+<DigitalClock />;
+```
+
+## useContext Example
+
+`useContext` allows sharing state across components without passing props down the tree.
+
+### Example: Theme Context
+
+```jsx
+import React, { createContext, useContext, useState } from "react";
+
+// Create a Theme Context
+const ThemeContext = createContext();
+
+function App() {
+  const [theme, setTheme] = useState("light");
+
+  return (
+    <ThemeContext.Provider value={{ theme, setTheme }}>
+      <Toolbar />
+    </ThemeContext.Provider>
+  );
+}
+
+function Toolbar() {
+  return (
+    <div>
+      <ThemeToggleButton />
+    </div>
+  );
+}
+
+function ThemeToggleButton() {
+  const { theme, setTheme } = useContext(ThemeContext);
+
+  return (
+    <button
+      onClick={() => setTheme(theme === "light" ? "dark" : "light")}
+    >
+      Toggle Theme
+    </button>
+  );
+}
+
+// Usage
+<App />;
+```
+
+## useRef Example
+
+`useRef` creates a reference to a DOM element or a value that persists across renders without causing re-renders when updated.
+
+### Example: Focus Input
+
+```jsx
+import React, { useRef } from "react";
+
+function FocusInput() {
+  const inputRef = useRef();
+
+  const focusInput = () => {
+    inputRef.current.focus();
+  };
+
+  return (
+    <div>
+      <input ref={inputRef} type="text" />
+      <button onClick={focusInput}>Focus Input</button>
+    </div>
+  );
+}
+
+// Usage
+<FocusInput />;
+```
+
+
+
+## Stopwatch Component
+
+A stopwatch component allows users to start, stop, and reset the timer using `useState` and `useEffect`.
+
+### Example
+
+```jsx
+import React, { useState, useEffect } from "react";
+
+function Stopwatch() {
+  const [time, setTime] = useState(0);
+  const [isActive, setIsActive] = useState(false);
+
+  useEffect(() => {
+    let interval;
+    if (isActive) {
+      interval = setInterval(() => {
+        setTime((prevTime) => prevTime + 1);
+      }, 1000);
+    } else if (!isActive && time !== 0) {
+      clearInterval(interval);
+    }
+    return () => clearInterval(interval);
+  }, [isActive, time]);
+
+  const reset = () => {
+    setTime(0);
+    setIsActive(false);
+  };
+
+  return (
+    <div>
+      <h2>{time}s</h2>
+      <button onClick={() => setIsActive(!isActive)}>
+        {isActive ? "Pause" : "Start"}
+      </button>
+      <button onClick={reset}>Reset</button>
+    </div>
+  );
+}
+
+// Usage
+<Stopwatch />;
 ```
 
 ## Conclusion
 
-This course provided a comprehensive introduction to React, covering everything from setting up the development environment to creating components, handling state, rendering lists, and more. React is a powerful library that enables developers to build complex user interfaces efficiently and effectively.
+React is a powerful tool for building dynamic web applications. By mastering components, state management, hooks, and context, you can create interactive and reusable UIs.
 
 ## References
 
 - [React Documentation](https://reactjs.org/docs/getting-started.html)
-- [MDN Web Docs - React](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array)
-- [PropTypes Documentation](https://reactjs.org/docs/typechecking-with-proptypes.html)
-- [React Full Course for Free (2024) Video](https://youtu.be/CgkZ7MvWUAA?si=Atyj69cuti6I9RR-)
+- [MDN Web Docs](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
+- [JavaScript Array Methods](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array)
 
 ---
