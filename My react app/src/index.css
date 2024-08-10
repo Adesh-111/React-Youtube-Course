@@ -290,3 +290,11 @@ li{
   width: 100vw;
 }
 
+.box{
+  text-align: center;
+  color: brown;
+  border: 3px solid rgb(177, 85, 32);
+  padding: 15px;
+  border-radius: 10px;
+  margin: 5px;
+}
